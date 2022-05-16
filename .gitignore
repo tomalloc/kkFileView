@@ -29,3 +29,5 @@ nbdist/
 server/src/main/cache/
 server/src/main/file/
 .gradle/
+
+build/
