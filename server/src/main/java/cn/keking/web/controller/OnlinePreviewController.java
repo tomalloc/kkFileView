@@ -13,7 +13,7 @@ import fr.opensagres.xdocreport.core.io.IOUtils;
 import io.mola.galimatias.GalimatiasParseException;
 import jodd.io.NetUtil;
 import org.apache.commons.codec.binary.Base64;
-import org.artofsolving.jodconverter.util.PlatformUtils;
+import org.jodconverter.core.util.OSUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -149,7 +149,7 @@ public class OnlinePreviewController {
             URL url = WebUtils.normalizedURL(urlPath);
             if ("file".equals(url.getProtocol().toLowerCase(Locale.ROOT))) {
                 String filePath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.name());
-                if (PlatformUtils.isWindows()) {
+                if (OSUtils.IS_OS_WINDOWS) {
                     filePath = filePath.replaceAll("/", "\\\\");
                 }
                 filePath = filePath.substring(1);

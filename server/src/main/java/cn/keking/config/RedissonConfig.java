@@ -1,7 +1,6 @@
 package cn.keking.config;
 
 import io.netty.channel.nio.NioEventLoopGroup;
-import org.apache.commons.lang3.StringUtils;
 import org.redisson.client.codec.Codec;
 import org.redisson.config.Config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -50,26 +49,22 @@ public class RedissonConfig {
                 .setConnectionMinimumIdleSize(connectionMinimumIdleSize)
                 .setConnectionPoolSize(connectionPoolSize)
                 .setDatabase(database)
-                .setDnsMonitoring(dnsMonitoring)
                 .setDnsMonitoringInterval(dnsMonitoringInterval)
                 .setSubscriptionConnectionMinimumIdleSize(subscriptionConnectionMinimumIdleSize)
                 .setSubscriptionConnectionPoolSize(subscriptionConnectionPoolSize)
                 .setSubscriptionsPerConnection(subscriptionsPerConnection)
                 .setClientName(clientName)
-                .setFailedAttempts(failedAttempts)
                 .setRetryAttempts(retryAttempts)
                 .setRetryInterval(retryInterval)
-                .setReconnectionTimeout(reconnectionTimeout)
                 .setTimeout(timeout)
                 .setConnectTimeout(connectTimeout)
                 .setIdleConnectionTimeout(idleConnectionTimeout)
-                .setPingTimeout(pingTimeout)
-                .setPassword(StringUtils.trimToNull(password));
+                .setPassword(password==null?null:password.trim());
+
         Codec codec=(Codec) ClassUtils.forName(getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
         config.setCodec(codec);
         config.setThreads(thread);
         config.setEventLoopGroup(new NioEventLoopGroup());
-        config.setUseLinuxNativeEpoll(false);
         return config;
     }
 

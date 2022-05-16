@@ -1,10 +1,10 @@
 package cn.keking.web.filter;
 
 import cn.keking.config.ConfigConstants;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -56,13 +56,13 @@ public class TrustHostFilter implements Filter {
         String url = request.getParameter("url");
         String currentUrl = request.getParameter("currentUrl");
         String urlPath = request.getParameter("urlPath");
-        if (StringUtils.isNotBlank(url)) {
+        if (StringUtils.hasText(url)) {
             return url;
         }
-        if (StringUtils.isNotBlank(currentUrl)) {
+        if (StringUtils.hasText(currentUrl)) {
             return currentUrl;
         }
-        if (StringUtils.isNotBlank(urlPath)) {
+        if (StringUtils.hasText(urlPath)) {
             return urlPath;
         }
         return null;

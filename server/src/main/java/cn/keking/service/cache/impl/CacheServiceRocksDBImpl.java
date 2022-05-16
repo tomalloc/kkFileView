@@ -1,7 +1,7 @@
 package cn.keking.service.cache.impl;
 
 import cn.keking.service.cache.CacheService;
-import org.artofsolving.jodconverter.util.ConfigUtils;
+import cn.keking.utils.ConfigUtils;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
 import org.slf4j.Logger;
@@ -180,7 +180,10 @@ public class CacheServiceRocksDBImpl implements CacheService {
     public Map<String, String> getMediaConvertCache() {
         Map<String, String> result = new HashMap<>();
         try{
-            result = (Map<String, String>) toObject(db.get(FILE_PREVIEW_MEDIA_CONVERT_KEY.getBytes()));
+            byte[] data = db.get(FILE_PREVIEW_MEDIA_CONVERT_KEY.getBytes());
+            if(data!=null&&data.length>=0){
+                result = (Map<String, String>) toObject(data);
+            }
         } catch (RocksDBException | IOException | ClassNotFoundException e) {
             LOGGER.error("Get from RocksDB Exception" + e);
         }
