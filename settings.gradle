@@ -1,0 +1,3 @@
+rootProject.name = 'kkFileView-parent'
+include(':kkFileView')
+project(":kkFileView").projectDir = file('server')
